@@ -21,7 +21,7 @@ func SaveUser(u *structure.User, hashedPassword string, createdBy int64) error {
 
 // UpdateUser TODO
 func UpdateUser(u *structure.User, userID int64) error {
-	err := database.UpdateUser(u.ID, u.Name, u.Slug, u.Email, u.Image, u.Cover, u.Bio, u.Website, u.Location, date.GetCurrentTime(), userID)
+	err := database.UpdateUser(u.ID, u.Name, u.Slug, u.Email, u.Image, u.Cover, u.Bio, u.Website, u.Location, u.Twitter, u.Facebook, date.GetCurrentTime(), userID)
 	if err != nil {
 		return err
 	}

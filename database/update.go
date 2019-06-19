@@ -7,7 +7,7 @@ import (
 const stmtUpdatePost = "UPDATE posts SET title = ?, slug = ?, markdown = ?, html = ?, featured = ?, page = ?, status = ?, meta_description = ?, image = ?, updated_at = ?, updated_by = ? WHERE id = ?"
 const stmtUpdatePostPublished = "UPDATE posts SET title = ?, slug = ?, markdown = ?, html = ?, featured = ?, page = ?, status = ?, meta_description = ?, image = ?, updated_at = ?, updated_by = ?, published_at = ?, published_by = ? WHERE id = ?"
 const stmtUpdateSettings = "UPDATE settings SET value = ?, updated_at = ?, updated_by = ? WHERE key = ?"
-const stmtUpdateUser = "UPDATE users SET name = ?, slug = ?, email = ?, image = ?, cover = ?, bio = ?, website = ?, location = ?, updated_at = ?, updated_by = ? WHERE id = ?"
+const stmtUpdateUser = "UPDATE users SET name = ?, slug = ?, email = ?, image = ?, cover = ?, bio = ?, website = ?, location = ?, twitter = ?, facebook = ?, updated_at = ?, updated_by = ? WHERE id = ?"
 const stmtUpdateLastLogin = "UPDATE users SET last_login = ? WHERE id = ?"
 const stmtUpdateUserPassword = "UPDATE users SET password = ?, updated_at = ?, updated_by = ? WHERE id = ?"
 
@@ -107,13 +107,13 @@ func UpdateActiveTheme(activeTheme string, updatedAt time.Time, updatedBy int64)
 }
 
 // UpdateUser TODO
-func UpdateUser(userID int64, name []byte, slug string, email []byte, image []byte, cover []byte, bio []byte, website []byte, location []byte, updatedAt time.Time, updatedBy int64) error {
+func UpdateUser(userID int64, name []byte, slug string, email []byte, image []byte, cover []byte, bio []byte, website []byte, location []byte, twitter []byte, facebook []byte, updatedAt time.Time, updatedBy int64) error {
 	writeDB, err := readDB.Begin()
 	if err != nil {
 		writeDB.Rollback()
 		return err
 	}
-	_, err = writeDB.Exec(stmtUpdateUser, name, slug, email, image, cover, bio, website, location, updatedAt, updatedBy, userID)
+	_, err = writeDB.Exec(stmtUpdateUser, name, slug, email, image, cover, bio, website, location, twitter, facebook, updatedAt, updatedBy, userID)
 	if err != nil {
 		writeDB.Rollback()
 		return err

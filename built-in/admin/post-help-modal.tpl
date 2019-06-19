@@ -32,21 +32,18 @@
 			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					# Biggest Heading
-					<hr>
 					<h1>Biggest Heading</h1>
 				</div>
 			</div>
  			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					## Second Biggest Heading
-					<hr>
 					<h2>Second Biggest Heading</h2>
 				</div>
 			</div>
 			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					### Third Biggest Heading
-					<hr>
 					<h3>Third Biggest Heading</h3>
 				</div>
 			</div>
@@ -55,21 +52,18 @@
 			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					#### 4th Biggest Heading
-					<hr>
 					<h4>4th Biggest Heading</h4>
 				</div>
 			</div>
 			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					##### 5th Biggest Heading
-					<hr>
 					<h5>5th Biggest Heading</h5>
 				</div>
 			</div>
 			<div class="col-sm-4 help-col">
 				<div class="help-inner-col">
 					###### 6th Biggest Heading
-					<hr>
 					<h6>6th Biggest Heading</h6>
 				</div>
 			</div>
@@ -84,7 +78,7 @@
 					Paragraphs are simple.<br>
 					<br>
 					Just follow your paragraph with a blank new line.<br>
-					<hr>
+					<br>
 					<p>Paragraphs are simple.</p>
 					<p>Just follow your paragraph with a blank new line.</p>
 				</div>
@@ -98,16 +92,16 @@
 			<div class="col-sm-6">
 				<div class="help-inner-col">
 					[Link to Google](http://www.google.com)
-					<hr>
+					<br>
 					<a target="_blank" href="http://www.google.com">Link to Google</a>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="help-inner-col">
 					![Image alt text](/public/images/blog-cover.jpg)
-					<hr>
+					<br>
 					<img src="/public/images/blog-cover.jpg" alt="Image alt text" title="">
-					<hr>
+					<br>
 					Or use the image upload function by clicking on <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> in the top right corner of your edit area!
 				</div>
 			</div>
@@ -120,7 +114,7 @@
 			<div class="col-sm-12">
 				<div class="help-inner-col">
 					> You can quote text like this.
-					<hr>
+					<br>
 					<blockquote><p>You can quote text like this.</p></blockquote>
 				</div>
 			</div>
@@ -133,21 +127,21 @@
 			<div class="col-sm-4">
 				<div class="help-inner-col">
 					*This text is italic.*
-					<hr>
+					<br>
 					<em>This text is italic.</em>
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="help-inner-col">
 					**This text is bold.**
-					<hr>
+					<br>
 					<strong>This text is bold.</strong>
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="help-inner-col">
 					***This text is italic and bold.***
-					<hr>
+					<br>
 					<strong><em>This text is italic and bold.</em></strong>
 				</div>
 			</div>

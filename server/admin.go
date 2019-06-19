@@ -99,7 +99,7 @@ func getLoginHandler(w http.ResponseWriter, r *http.Request, _ map[string]string
 		http.Redirect(w, r, "/admin/register/", 302)
 		return
 	}
-	http.ServeFile(w, r, filepath.Join(filenames.AdminFilepath, "login.html"))
+	serveFile(w, r, filepath.Join(filenames.AdminFilepath, "login.html"))
 	return
 }
 
@@ -123,7 +123,7 @@ func postLoginHandler(w http.ResponseWriter, r *http.Request, _ map[string]strin
 func getRegistrationHandler(w http.ResponseWriter, r *http.Request, _ map[string]string) {
 	writeXSSHeaders(w)
 	if database.RetrieveUsersCount() == 0 {
-		http.ServeFile(w, r, filepath.Join(filenames.AdminFilepath, "registration.html"))
+		serveFile(w, r, filepath.Join(filenames.AdminFilepath, "registration.html"))
 		return
 	}
 	http.Redirect(w, r, "/admin/", 302)
@@ -177,7 +177,7 @@ func adminHandler(w http.ResponseWriter, r *http.Request, _ map[string]string) {
 	}
 	userName := authentication.GetUserName(r)
 	if userName != "" {
-		http.ServeFile(w, r, filepath.Join(filenames.AdminFilepath, "admin.html"))
+		serveFile(w, r, filepath.Join(filenames.AdminFilepath, "admin.html"))
 		return
 	}
 	http.Redirect(w, r, "/admin/login/", 302)

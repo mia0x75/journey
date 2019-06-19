@@ -45,7 +45,7 @@ func ShowPostTemplate(writer http.ResponseWriter, r *http.Request, slug string) 
 	requestData := structure.RequestData{Posts: make([]structure.Post, 1), Blog: methods.Blog, CurrentTemplate: 1, CurrentPath: r.URL.Path} // CurrentTemplate = post
 	requestData.Posts[0] = *post
 	// Check if there's a custom page template available for this slug
-	if template, ok := compiledTemplates.m["page-"+slug]; ok {
+	if template, ok := compiledTemplates.m["page-"+post.Slug]; ok {
 		_, err = writer.Write(executeHelper(template, &requestData, 1)) // context = post
 		return err
 	}
@@ -71,15 +71,19 @@ func ShowAuthorTemplate(writer http.ResponseWriter, r *http.Request, slug string
 	defer compiledTemplates.RUnlock()
 	methods.Blog.RLock()
 	defer methods.Blog.RUnlock()
-	postIndex := int64(page - 1)
-	if postIndex < 0 {
-		postIndex = 0
-	}
 	author, err := database.RetrieveUserBySlug(slug)
 	if err != nil {
 		return err
 	}
-	posts, err := database.RetrievePostsByUser(author.ID, methods.Blog.PostsPerPage, (methods.Blog.PostsPerPage * postIndex))
+	offset := methods.Blog.PostsPerPage * int64(page-1)
+	postsCount, err := database.RetrieveNumberOfPostsByUser(author.ID)
+	if err != nil {
+		return err
+	}
+	if postsCount <= offset {
+		return errors.New("page not found")
+	}
+	posts, err := database.RetrievePostsByUser(author.ID, methods.Blog.PostsPerPage, offset)
 	if err != nil {
 		return err
 	}
@@ -103,15 +107,19 @@ func ShowTagTemplate(writer http.ResponseWriter, r *http.Request, slug string, p
 	defer compiledTemplates.RUnlock()
 	methods.Blog.RLock()
 	defer methods.Blog.RUnlock()
-	postIndex := int64(page - 1)
-	if postIndex < 0 {
-		postIndex = 0
-	}
 	tag, err := database.RetrieveTagBySlug(slug)
 	if err != nil {
 		return err
 	}
-	posts, err := database.RetrievePostsByTag(tag.ID, methods.Blog.PostsPerPage, (methods.Blog.PostsPerPage * postIndex))
+	offset := methods.Blog.PostsPerPage * int64(page-1)
+	postsCount, err := database.RetrieveNumberOfPostsByTag(tag.ID)
+	if err != nil {
+		return err
+	}
+	if postsCount <= offset {
+		return errors.New("Page not found")
+	}
+	posts, err := database.RetrievePostsByTag(tag.ID, methods.Blog.PostsPerPage, offset)
 	if err != nil {
 		return err
 	}
@@ -135,11 +143,8 @@ func ShowIndexTemplate(w http.ResponseWriter, r *http.Request, page int) error {
 	defer compiledTemplates.RUnlock()
 	methods.Blog.RLock()
 	defer methods.Blog.RUnlock()
-	postIndex := int64(page - 1)
-	if postIndex < 0 {
-		postIndex = 0
-	}
-	posts, err := database.RetrievePostsForIndex(methods.Blog.PostsPerPage, (methods.Blog.PostsPerPage * postIndex))
+	offset := methods.Blog.PostsPerPage * int64(page-1)
+	posts, err := database.RetrievePostsForIndex(methods.Blog.PostsPerPage, offset)
 	if err != nil {
 		return err
 	}

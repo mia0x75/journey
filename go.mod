@@ -2,6 +2,7 @@ module github.com/mia0x75/pages
 
 require (
 	github.com/dimfeld/httptreemux v5.0.1+incompatible
+	github.com/golang/gddo v0.0.0-20190419222130-af0f2af80721
 	github.com/gorilla/securecookie v1.1.1
 	github.com/kabukky/feeds v0.0.0-20151110114325-c7025aca4568
 	github.com/kabukky/httpscerts v0.0.0-20150320125433-617593d7dcb3

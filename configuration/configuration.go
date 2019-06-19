@@ -8,10 +8,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/kabukky/journey/filenames"
+	"github.com/mia0x75/pages/filenames"
 )
 
-// Configuration: settings that are neccesary for server configuration
+// Configuration settings that are neccesary for server configuration
 type Configuration struct {
 	HttpHostAndPort  string
 	HttpsHostAndPort string
@@ -21,6 +21,7 @@ type Configuration struct {
 	UseLetsEncrypt   bool
 }
 
+// NewConfiguration TODO:
 func NewConfiguration() *Configuration {
 	var config Configuration
 	err := config.load()
@@ -40,7 +41,7 @@ func NewConfiguration() *Configuration {
 	return &config
 }
 
-// Global config - thread safe and accessible from all packages
+// Config Global config - thread safe and accessible from all packages
 var Config = NewConfiguration()
 
 func (c *Configuration) save() error {

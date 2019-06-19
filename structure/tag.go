@@ -1,7 +1,7 @@
 package structure
 
 type Tag struct {
-	Id   int64
+	ID   int64
 	Name []byte
 	Slug string
 }

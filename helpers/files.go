@@ -5,10 +5,12 @@ import (
 	"path/filepath"
 )
 
+// GetFilenameWithoutExtension TODO
 func GetFilenameWithoutExtension(path string) string {
 	return filepath.Base(path)[0 : len(filepath.Base(path))-len(filepath.Ext(path))]
 }
 
+// IsDirectory TODO
 func IsDirectory(path string) bool {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
@@ -17,6 +19,7 @@ func IsDirectory(path string) bool {
 	return fileInfo.IsDir()
 }
 
+// FileExists TODO
 func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {

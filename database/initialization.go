@@ -3,13 +3,14 @@ package database
 import (
 	"database/sql"
 
-	"github.com/kabukky/journey/database/migration"
-	"github.com/kabukky/journey/date"
-	"github.com/kabukky/journey/filenames"
-	"github.com/kabukky/journey/helpers"
-	"github.com/kabukky/journey/structure"
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3" // TODO
 	"github.com/satori/go.uuid"
+
+	"github.com/mia0x75/pages/database/migration"
+	"github.com/mia0x75/pages/date"
+	"github.com/mia0x75/pages/filenames"
+	"github.com/mia0x75/pages/helpers"
+	"github.com/mia0x75/pages/structure"
 )
 
 // Handler for read access
@@ -126,6 +127,7 @@ var stmtInitialization = `CREATE TABLE IF NOT EXISTS
 	);
 	`
 
+// Initialize TODO
 func Initialize() error {
 	// If journey.db does not exist, look for a Ghost database to convert
 	if !helpers.FileExists(filenames.DatabaseFilename) {

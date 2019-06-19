@@ -1,10 +1,12 @@
 package authentication
 
 import (
-	"github.com/kabukky/journey/database"
 	"golang.org/x/crypto/bcrypt"
+
+	"github.com/mia0x75/pages/database"
 )
 
+// LoginIsCorrect TODO
 func LoginIsCorrect(name string, password string) bool {
 	hashedPassword, err := database.RetrieveHashedPasswordForUser([]byte(name))
 	if len(hashedPassword) == 0 || err != nil { // len(hashedPassword) == 0 probably not needed.
@@ -18,6 +20,7 @@ func LoginIsCorrect(name string, password string) bool {
 	return true
 }
 
+// EncryptPassword TODO
 func EncryptPassword(password string) (string, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 10)
 	if err != nil {

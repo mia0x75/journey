@@ -1,15 +1,17 @@
 package methods
 
 import (
-	"github.com/kabukky/journey/slug"
-	"github.com/kabukky/journey/structure"
 	"strings"
+
+	"github.com/mia0x75/pages/slug"
+	"github.com/mia0x75/pages/structure"
 )
 
+// GenerateTagsFromCommaString TODO
 func GenerateTagsFromCommaString(input string) []structure.Tag {
 	output := make([]structure.Tag, 0)
 	tags := strings.Split(input, ",")
-	for index, _ := range tags {
+	for index := range tags {
 		tags[index] = strings.TrimSpace(tags[index])
 	}
 	for _, tag := range tags {

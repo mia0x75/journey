@@ -1,14 +1,16 @@
 package authentication
 
 import (
-	"github.com/gorilla/securecookie"
 	"net/http"
+
+	"github.com/gorilla/securecookie"
 )
 
 var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
 	securecookie.GenerateRandomKey(32))
 
+// SetSession TODO
 func SetSession(userName string, response http.ResponseWriter) {
 	value := map[string]string{
 		"name": userName,
@@ -23,6 +25,7 @@ func SetSession(userName string, response http.ResponseWriter) {
 	}
 }
 
+// GetUserName TODO
 func GetUserName(request *http.Request) (userName string) {
 	if cookie, err := request.Cookie("session"); err == nil {
 		cookieValue := make(map[string]string)
@@ -33,6 +36,7 @@ func GetUserName(request *http.Request) (userName string) {
 	return userName
 }
 
+// ClearSession TODO
 func ClearSession(response http.ResponseWriter) {
 	cookie := &http.Cookie{
 		Name:   "session",

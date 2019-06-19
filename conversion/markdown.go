@@ -25,7 +25,8 @@ const (
 		blackfriday.EXTENSION_FOOTNOTES
 )
 
-func GenerateHtmlFromMarkdown(input []byte) []byte {
+// GenerateHTMLFromMarkdown TODO
+func GenerateHTMLFromMarkdown(input []byte) []byte {
 	renderer := blackfriday.HtmlRenderer(htmlFlags, "", "")
 	return blackfriday.Markdown(input, renderer, extensions)
 }

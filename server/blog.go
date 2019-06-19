@@ -7,10 +7,11 @@ import (
 	"strconv"
 
 	"github.com/dimfeld/httptreemux"
-	"github.com/kabukky/journey/database"
-	"github.com/kabukky/journey/filenames"
-	"github.com/kabukky/journey/structure/methods"
-	"github.com/kabukky/journey/templates"
+
+	"github.com/mia0x75/pages/database"
+	"github.com/mia0x75/pages/filenames"
+	"github.com/mia0x75/pages/structure/methods"
+	"github.com/mia0x75/pages/templates"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request, params map[string]string) {
@@ -146,7 +147,7 @@ func postEditHandler(w http.ResponseWriter, r *http.Request, params map[string]s
 		return
 	}
 
-	url := fmt.Sprintf("/admin/#/edit/%d", post.Id)
+	url := fmt.Sprintf("/admin/#/edit/%d", post.ID)
 	http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 }
 
@@ -168,6 +169,7 @@ func publicHandler(w http.ResponseWriter, r *http.Request, params map[string]str
 	return
 }
 
+// InitializeBlog TODO
 func InitializeBlog(router *httptreemux.TreeMux) {
 	// For index
 	router.GET("/", indexHandler)

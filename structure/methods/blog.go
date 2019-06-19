@@ -2,26 +2,28 @@ package methods
 
 import (
 	"encoding/json"
-	"github.com/kabukky/journey/configuration"
-	"github.com/kabukky/journey/database"
-	"github.com/kabukky/journey/date"
-	"github.com/kabukky/journey/slug"
-	"github.com/kabukky/journey/structure"
 	"log"
+
+	"github.com/mia0x75/pages/configuration"
+	"github.com/mia0x75/pages/database"
+	"github.com/mia0x75/pages/date"
+	"github.com/mia0x75/pages/slug"
+	"github.com/mia0x75/pages/structure"
 )
 
-// Global blog - thread safe and accessible by all requests
+// Blog Global blog - thread safe and accessible by all requests
 var Blog *structure.Blog
 
 var assetPath = []byte("/assets/")
 
-func UpdateBlog(b *structure.Blog, userId int64) error {
+// UpdateBlog TODO
+func UpdateBlog(b *structure.Blog, userID int64) error {
 	// Marshal navigation items to json string
 	navigation, err := json.Marshal(b.NavigationItems)
 	if err != nil {
 		return err
 	}
-	err = database.UpdateSettings(b.Title, b.Description, b.Logo, b.Cover, b.PostsPerPage, b.ActiveTheme, navigation, date.GetCurrentTime(), userId)
+	err = database.UpdateSettings(b.Title, b.Description, b.Logo, b.Cover, b.PostsPerPage, b.ActiveTheme, navigation, date.GetCurrentTime(), userID)
 	if err != nil {
 		return err
 	}
@@ -33,8 +35,9 @@ func UpdateBlog(b *structure.Blog, userId int64) error {
 	return nil
 }
 
-func UpdateActiveTheme(activeTheme string, userId int64) error {
-	err := database.UpdateActiveTheme(activeTheme, date.GetCurrentTime(), userId)
+// UpdateActiveTheme TODO
+func UpdateActiveTheme(activeTheme string, userID int64) error {
+	err := database.UpdateActiveTheme(activeTheme, date.GetCurrentTime(), userID)
 	if err != nil {
 		return err
 	}
@@ -46,6 +49,7 @@ func UpdateActiveTheme(activeTheme string, userId int64) error {
 	return nil
 }
 
+// GenerateBlog TODO
 func GenerateBlog() error {
 	// Write lock the global blog
 	if Blog != nil {
@@ -58,10 +62,10 @@ func GenerateBlog() error {
 		return err
 	}
 	// Add parameters that are not saved in db
-	blog.Url = []byte(configuration.Config.Url)
+	blog.URL = []byte(configuration.Config.Url)
 	blog.AssetPath = assetPath
 	// Create navigation slugs
-	for index, _ := range blog.NavigationItems {
+	for index := range blog.NavigationItems {
 		blog.NavigationItems[index].Slug = slug.Generate(blog.NavigationItems[index].Label, "navigation")
 	}
 	Blog = blog

@@ -1,16 +1,19 @@
 package watcher
 
 import (
-	"github.com/kabukky/journey/helpers"
-	"gopkg.in/fsnotify.v1"
 	"log"
 	"os"
 	"path/filepath"
+
+	"gopkg.in/fsnotify.v1"
+
+	"github.com/mia0x75/pages/helpers"
 )
 
 var watcher *fsnotify.Watcher
 var watchedDirectories []string
 
+// Watch TODO
 func Watch(paths []string, extensionsFunctions map[string]func() error) error {
 	// Prepare watcher to generate the theme on changes to the files
 	if watcher == nil {

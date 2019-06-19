@@ -1,15 +1,16 @@
 package database
 
-const stmtDeletePostTagsByPostId = "DELETE FROM posts_tags WHERE post_id = ?"
-const stmtDeletePostById = "DELETE FROM posts WHERE id = ?"
+const stmtDeletePostTagsByPostID = "DELETE FROM posts_tags WHERE post_id = ?"
+const stmtDeletePostByID = "DELETE FROM posts WHERE id = ?"
 
-func DeletePostTagsForPostId(post_id int64) error {
+// DeletePostTagsForPostID TODO
+func DeletePostTagsForPostID(postID int64) error {
 	writeDB, err := readDB.Begin()
 	if err != nil {
 		writeDB.Rollback()
 		return err
 	}
-	_, err = writeDB.Exec(stmtDeletePostTagsByPostId, post_id)
+	_, err = writeDB.Exec(stmtDeletePostTagsByPostID, postID)
 	if err != nil {
 		writeDB.Rollback()
 		return err
@@ -17,13 +18,14 @@ func DeletePostTagsForPostId(post_id int64) error {
 	return writeDB.Commit()
 }
 
-func DeletePostById(id int64) error {
+// DeletePostByID TODO
+func DeletePostByID(postID int64) error {
 	writeDB, err := readDB.Begin()
 	if err != nil {
 		writeDB.Rollback()
 		return err
 	}
-	_, err = writeDB.Exec(stmtDeletePostById, id)
+	_, err = writeDB.Exec(stmtDeletePostByID, postID)
 	if err != nil {
 		writeDB.Rollback()
 		return err
